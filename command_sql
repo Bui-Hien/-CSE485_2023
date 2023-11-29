@@ -1,0 +1,9 @@
+a, select * from theloai where ten_tloai like 'Nhạc trữ tình';
+b, SELECT *
+   FROM baiviet
+   JOIN tacgia ON baiviet.ma_tgia = tacgia.ma_tgia
+   WHERE tacgia.ten_tgia = 'Nhacvietplus';
+ d, SELECT baiviet.ma_bviet, baiviet.ten_bhat, tacgia.ten_tgia, theloai.ten_tloai, baiviet.ngayviet
+    FROM baiviet
+    JOIN tacgia ON baiviet.ma_tgia = tacgia.ma_tgia
+    JOIN theloai ON theloai.ma_tloai = baiviet.ma_tloai;
