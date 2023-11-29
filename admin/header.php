@@ -42,7 +42,10 @@ $currentFile = basename($_SERVER['PHP_SELF']);
                         <a class="nav-link  <?php echo $currentFile === "author.php" ? "active fw-bold" : ""; ?>" href="author.php">Tác giả</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo $currentFile === "article.php" ? "active fw-bold" : ""; ?>" href="article.php">Bài viết</a>
+                        <a class="nav-link
+                        <?php echo $currentFile === "article.php" ? "active fw-bold" : ""; ?>
+                         <?php echo $currentFile === "edit_article.php" ? "active fw-bold" : ""; ?>"
+                        href="article.php">Bài viết</a>
                     </li>
                 </ul>
             </div>
