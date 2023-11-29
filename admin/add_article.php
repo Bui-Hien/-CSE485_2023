@@ -42,10 +42,6 @@ include("./header.php")
             <h3 class="text-center text-uppercase fw-bold">Thêm thông tin bài viết</h3>
             <form action="process_add_ariticle.php" method="post">
                 <div class="input-group mt-3 mb-3">
-                    <span class="input-group-text" style="width: 110px" id="lblCatId">ma_bviet</span>
-                    <input type="text" class="form-control" name="ma_bviet" value="">
-                </div>
-                <div class="input-group mt-3 mb-3">
                     <span class="input-group-text" style="width: 110px" id="lblCatId">Tiêu đề</span>
                     <input type="text" class="form-control" name="tieude" value="">
                 </div>
@@ -90,11 +86,6 @@ include("./header.php")
 </main>
 <?php
 include("./footer.php")
-?>
-
-<?php
-$currentFile = basename($_SERVER['PHP_SELF']);
-echo $currentFile;
 ?>
 
 
