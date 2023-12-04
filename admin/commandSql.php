@@ -132,5 +132,34 @@ function insertArticle($tieude, $ten_bhat, $ma_tloai, $tomtat, $noidung, $ma_tgi
         exit();
     }
 }
+function loggin($user, $pass){
+    global $pdo;
+    try {
+        //B2. thuc thi truy van
+        $sql = "SELECT * FROM users WHERE (username = :user OR email= :email)";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':user',$user);
+        $stmt->bindParam(':email',$user);
+        $stmt->execute();
+
+        //B3. xu ly truy van
+        if ($stmt->rowCount() > 0) {
+            $row = $stmt->fetch();
+            $pass_saved = $row['pass'];
+            if (password_verify($pass, $pass_saved)) {
+                header("Location:admin/index.php");
+            } else {
+                $error = "Password invalid";
+                header("Location:login.php?error=$error");
+            }
+        } else {
+            $error = "Username not found";
+            header("Location:login.php?error=$error");
+        }
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
 
 ?>
