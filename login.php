@@ -1,10 +1,16 @@
 <?php
-require("commandSql.php");
+require_once 'Database.php';
+require_once 'Command_sql.php';
+
 if (isset($_POST['username']) && isset($_POST['password'])) {
     //Lay thong tin tu FORM gui toi
     $user = $_POST['username'];
     $pass = $_POST['password'];
-    loggin($user, $pass);
+
+
+    $db = new \conn\Database();
+    $command_sql = new \conn\Command_sql($db);
+    $command_sql->loggin($user, $pass);
 } ?>
 <!DOCTYPE html>
 <html lang="en">

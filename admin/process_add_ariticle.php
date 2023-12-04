@@ -1,5 +1,12 @@
 <?php
-require("commandSql.php");
+require_once '../Database.php';
+require_once '../Command_sql.php';
+
+
+$db = new \conn\Database();
+$command_sql = new \conn\Command_sql($db);
+
+
 try {
     if (
         isset($_POST['ma_bviet']) &&
@@ -12,8 +19,7 @@ try {
         isset($_POST['ngayviet']) &&
         isset($_POST['hinhanh'])
     ) {
-        updateArticle(
-            $_POST['ma_bviet'],
+        $command_sql->updateArticle($_POST['ma_bviet'],
             $_POST['tieude'],
             $_POST['ten_bhat'],
             $_POST['ma_tloai'],
@@ -21,8 +27,7 @@ try {
             $_POST['noidung'],
             $_POST['ma_tgia'],
             $_POST['ngayviet'],
-            $_POST['hinhanh']
-        );
+            $_POST['hinhanh']);
     }
 
     if (
@@ -36,7 +41,7 @@ try {
         isset($_POST['ngayviet']) &&
         isset($_POST['hinhanh'])
     ) {
-        insertArticle(
+        $command_sql->insertArticle(
             $_POST['tieude'],
             $_POST['ten_bhat'],
             $_POST['ma_tloai'],
