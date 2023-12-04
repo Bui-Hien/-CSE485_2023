@@ -2,29 +2,29 @@
 <?php
 include("./header.php")
 ?>
-
+<!---->
 <?php
-try {
-    $conn = new PDO(dsn: "mysql:host=localhost;dbname=btth01_cse485_ex.sql", username: "root", password: "");
-} catch (PDOException $e) {
-    echo $e->getMessage();
-}
-// $sql_select_count_user = 'SELECT COUNT(ma_tloai) FROM theloai' ;
-$sql_select_tloai = 'SELECT COUNT(*) FROM theloai' ;
-$sql_select_tac_gia = 'SELECT COUNT(*) FROM tacgia' ;
-$sql_select_bai_viet = 'SELECT COUNT(*) FROM baiviet' ;
-$stmt = $conn->prepare($sql_select_tloai);
-$stmt->execute();
-$sl_tloai =  $stmt->fetchColumn();
-$stmt = $conn->prepare($sql_select_tac_gia);
-$stmt->execute();
-$sl_tgia =  $stmt->fetchColumn();
-$stmt = $conn->prepare($sql_select_bai_viet);
-$stmt->execute();
-$sl_bviet = $stmt->fetchColumn();
-
-
-?>
+//try {
+//    $conn = new PDO(dsn: "mysql:host=mariadb;dbname=btth01_cse485_ex.sql", username: "root", password: "your_password");
+//} catch (PDOException $e) {
+//    echo $e->getMessage();
+//}
+//// $sql_select_count_user = 'SELECT COUNT(ma_tloai) FROM theloai' ;
+//$sql_select_tloai = 'SELECT COUNT(*) FROM theloai' ;
+//$sql_select_tac_gia = 'SELECT COUNT(*) FROM tacgia' ;
+//$sql_select_bai_viet = 'SELECT COUNT(*) FROM baiviet' ;
+//$stmt = $conn->prepare($sql_select_tloai);
+//$stmt->execute();
+//$sl_tloai =  $stmt->fetchColumn();
+//$stmt = $conn->prepare($sql_select_tac_gia);
+//$stmt->execute();
+//$sl_tgia =  $stmt->fetchColumn();
+//$stmt = $conn->prepare($sql_select_bai_viet);
+//$stmt->execute();
+//$sl_bviet = $stmt->fetchColumn();
+//
+//
+//?>
 <main class="container mt-5 mb-5">
     <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
     <div class="row">
