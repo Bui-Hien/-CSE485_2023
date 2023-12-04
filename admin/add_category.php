@@ -9,6 +9,7 @@ include("./header.php")
                 <form action="process_add_category.php" method="post">
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblCatName">Tên thể loại</span>
+                        <input type="hidden" class="form-control" name="add">
                         <input type="text" class="form-control" name="txtCatName" >
                     </div>
 
