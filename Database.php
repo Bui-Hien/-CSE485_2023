@@ -2,18 +2,15 @@
 
 namespace conn;
 
-use PDO;
-use PDOException;
-
-class Database
+class conn
 {
     private $host = 'mariadb';
-    private $port = '3306';
+    private $port = "3306";
     private $db = 'BTTH01_CSE485_ex.sql';
     private $user = 'root';
     private $pass = 'your_password';
     private $charset = 'utf8mb4';
-    private $connection = null;
+    private $dsn = null;
     private $options = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -24,15 +21,10 @@ class Database
     {
         $dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->db};charset={$this->charset}";
         try {
-            $this->connection = new PDO($dsn, $this->user, $this->pass, $this->options);
+            $this->dsn = new PDO($dsn, $this->user, $this->pass, $this->options);
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
-
-    public function getPDO()
-    {
-        return $this->connection;
-    }
 }
-?>
+
