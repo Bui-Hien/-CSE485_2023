@@ -18,7 +18,10 @@ class Command_sql
         try {
             $pdo = $this->db->getPDO();
             $stmt = $pdo->prepare("SELECT * FROM baiviet");
-            return $stmt->fetchAll();
+            $stmt->execute();
+            $baiviet = $stmt->fetchAll();
+            $stmt->closeCursor();
+            return $baiviet;
         } catch (PDOException $e) {
             error_log("Error fetching articles: " . $e->getMessage());
             return [];
@@ -34,8 +37,9 @@ class Command_sql
             $stmt->bindParam(':article_id', $id);
 
             $stmt->execute();
-
-            return $data = $stmt->fetchAll();
+            $data = $stmt->fetchAll();
+            $stmt->closeCursor();
+            return $data;
         } catch (PDOException $e) {
             echo $e->getMessage();
             return [];
@@ -49,7 +53,9 @@ class Command_sql
             $stmt = $pdo->prepare("DELETE FROM baiviet WHERE ma_bviet = :article_id");
             $stmt->bindParam(':article_id', $id);
             $stmt->execute();
-            return $stmt->rowCount();
+            $rowCout = $stmt->rowCount();
+            $stmt->closeCursor();
+            return $rowCout;
         } catch (PDOException $e) {
             error_log("Error deleting article: " . $e->getMessage());
             return 0;
@@ -85,8 +91,9 @@ class Command_sql
 
             // Execute the query
             $stmt->execute();
-
-            if ($stmt->rowCount() > 0) {
+            $rowCount = $stmt->rowCount();
+            $stmt->closeCursor();
+            if ($rowCount > 0) {
                 header("Location: article.php");
                 exit();
             } else {
@@ -128,8 +135,9 @@ class Command_sql
             $stmt->bindParam(':ma_bviet', $vars);
 
             $stmt->execute();
-
-            if ($stmt->rowCount() > 0) {
+            $rowCount = $stmt->rowCount();
+            $stmt->closeCursor();
+            if ($rowCount > 0) {
                 header("Location: article.php");
                 exit();
             } else {
@@ -157,7 +165,10 @@ class Command_sql
             if ($stmt->rowCount() > 0) {
                 $row = $stmt->fetch();
                 $pass_saved = $row['pass'];
+                $stmt->closeCursor();
                 if (password_verify($pass, $pass_saved)) {
+                    session_start();//Cong ty dich vu Bao ve
+                    $_SESSION['isLogined'] = $user; //CAP THE Truy cap co ten la isLogined
                     header("Location:admin/index.php");
                 } else {
                     $error = "Password invalid";
@@ -169,6 +180,91 @@ class Command_sql
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
+        }
+    }
+    public function getTheLoai()
+    {
+        try {
+            $pdo = $this->db->getPDO();
+            $stmt = $pdo->prepare("SELECT * FROM theloai");
+            $stmt->execute();
+            $datas = $stmt->fetchAll();
+            $stmt->closeCursor();
+            return $datas;
+        } catch (PDOException $e) {
+            error_log("Error deleting article: " . $e->getMessage());
+            return 0;
+        }
+    }
+    public function getTacGia()
+    {
+        try {
+            $pdo = $this->db->getPDO();
+            $stmt = $pdo->prepare("SELECT * FROM tacgia");
+            $stmt->execute();
+            $datas = $stmt->fetchAll();
+            $stmt->closeCursor();
+            return $datas;
+        } catch (PDOException $e) {
+            error_log("Error deleting article: " . $e->getMessage());
+            return 0;
+        }
+    }
+
+    public function tong_bai_viet()
+    {
+        try {
+            $pdo = $this->db->getPDO();
+            $stmt = $pdo->prepare("SELECT ma_bviet FROM `baiviet`");
+            $stmt->execute();
+            $data = $stmt->rowCount();
+            $stmt->closeCursor();
+            return $data;
+        } catch (PDOException $e) {
+            error_log("Error deleting article: " . $e->getMessage());
+            return 0;
+        }
+    }
+    public function tong_the_loai()
+    {
+        try {
+            $pdo = $this->db->getPDO();
+            $stmt = $pdo->prepare("SELECT ma_tloai FROM `theloai` ");
+            $stmt->execute();
+            $data = $stmt->rowCount();
+            $stmt->closeCursor();
+            return $data;
+        } catch (PDOException $e) {
+            error_log("Error deleting article: " . $e->getMessage());
+            return 0;
+        }
+    }
+    public function tong_tac_gia()
+    {
+        try {
+            $pdo = $this->db->getPDO();
+            $stmt = $pdo->prepare("SELECT ma_tgia FROM `tacgia`");
+            $stmt->execute();
+            $data = $stmt->rowCount();
+            $stmt->closeCursor();
+            return $data;
+        } catch (PDOException $e) {
+            error_log("Error deleting article: " . $e->getMessage());
+            return 0;
+        }
+    }
+    public function tong_nguoi_dung()
+    {
+        try {
+            $pdo = $this->db->getPDO();
+            $stmt = $pdo->prepare("SELECT id FROM `users` WHERE 1");
+            $stmt->execute();
+            $data = $stmt->rowCount();
+            $stmt->closeCursor();
+            return $data;
+        } catch (PDOException $e) {
+            error_log("Error deleting article: " . $e->getMessage());
+            return 0;
         }
     }
 }

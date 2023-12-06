@@ -1,4 +1,11 @@
 <?php
+session_start();
+if (!isset($_SESSION['isLogined'])) { //Neu chua co the
+    header("Location:../login.php"); //Quay ra khai bao
+    exit(1);
+}
+?>
+<?php
 include("./header.php")
 ?>
 

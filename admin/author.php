@@ -1,15 +1,11 @@
 <?php
 include("./header.php")
 ?>
-
 <?php
-include("./footer.php")
-?>
-<?php
-$servername = "localhost";
+$servername = "mariadb";
 $username = "root";
-$password = "";
-$dbname = "btth01_cse485_ex.sql";
+$password = "your_password";
+$dbname = "BTTH01_CSE485_ex.sql";
 
 // Tạo kết nối
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -35,9 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"])) {
         } else {
             echo "Lỗi: " . $sql . "<br>" . $conn->error;
         }
-    }
-
-    // Xử lý sửa tác giả
+    } // Xử lý sửa tác giả
     elseif ($action == "edit" && isset($_POST["ten_tgia_edit"]) && isset($_POST["ten_tgia_moi"])) {
         $ten_tgia_edit = $_POST["ten_tgia_edit"];
         $ten_tgia_moi = $_POST["ten_tgia_moi"];
@@ -50,9 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"])) {
         } else {
             echo "Lỗi: " . $sql . "<br>" . $conn->error;
         }
-    }
-
-    // Xử lý xóa tác giả
+    } // Xử lý xóa tác giả
     elseif ($action == "delete" && isset($_POST["ma_tgia_delete"])) {
         $ma_tgia_delete = $_POST["ma_tgia_delete"];
 
@@ -179,7 +171,7 @@ while ($row_tentg = $result_tentg->fetch_assoc()) {
     <input type="hidden" name="action" value="delete">
     <input type="submit" name="submit" value="Xóa">
 </form>
-</body>
-</html>
 
-
+<?php
+include("./footer.php")
+?>

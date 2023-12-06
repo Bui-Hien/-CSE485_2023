@@ -1,9 +1,13 @@
 <?php
-require ("commandSql.php");
-$datas = getAllArticles();
-?>
-<?php
-include("./header.php")
+include("./header.php");
+require_once '../Database.php';
+require_once '../Command_sql.php';
+
+
+
+$db = new \conn\Database();
+$command_sql = new \conn\Command_sql($db);
+$datas = $command_sql->getAllArticles();
 ?>
 <main class="container mt-5 mb-5">
     <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
@@ -45,7 +49,8 @@ include("./header.php")
                                     class="fa-solid fa-pen-to-square"></i></a>
                     </td>
                     <td>
-                        <a href="delete_article.php?id=<?php echo $datas[$i]['ma_bviet'] ?>" onclick="mydelete()" id="delete">
+                        <a href="delete_article.php?id=<?php echo $datas[$i]['ma_bviet'] ?>" onclick="mydelete()"
+                           id="delete">
                             <i class="fa-solid fa-trash"></i>
                         </a>
                     </td>
