@@ -124,7 +124,7 @@ INSERT INTO `tacgia` (`ma_tgia`, `ten_tgia`, `hinh_tgia`) VALUES
 
 DROP TABLE IF EXISTS `theloai`;
 CREATE TABLE IF NOT EXISTS `theloai` (
-  `ma_tloai` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ma_tloai` int UNSIGNED NOT NULL,
   `ten_tloai` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`ma_tloai`)
 ) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
