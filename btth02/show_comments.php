@@ -1,10 +1,11 @@
 <?php
 // Include your PDO database connection file (replace db_connect.php with your actual file)
+global $connection;
 require_once("pdo_connect.php");
 
 // Prepare the SQL query using placeholders to prevent SQL injection
 $commentQuery = "SELECT id, parent_id, comment, sender, date FROM comment WHERE parent_id = :parent_id ORDER BY id DESC";
-$statement = $conn->prepare($commentQuery);
+$statement = $connection->prepare($commentQuery);
 $statement->bindParam(':parent_id', $parent_id); // Bind parameters to prevent SQL injection
 
 // Set the parent_id parameter for the main comments (parent_id = 0)
@@ -14,7 +15,7 @@ $parent_id = 0;
 $statement->execute();
 
 // Fetch comments
-$commentsResult = $statement->fetchAll(PDO::FETCH_ASSOC);
+$commentsResult = $statement->fetchAll();
 
 // Initialize comment HTML
 $commentHTML = '';
@@ -29,14 +30,14 @@ foreach ($commentsResult as $comment) {
 		</div> ';
 
     // Fetch and append reply comments
-    $commentHTML .= getCommentReply($conn, $comment["id"]);
+    $commentHTML .= getCommentReply($connection, $comment["id"]);
 }
 
 // Output the comments HTML
 echo $commentHTML;
 
 // Function to fetch reply comments (replace this with your actual function)
-function getCommentReply($conn, $parent_id) {
+function getCommentReply($connection, $parent_id) {
     // Write your logic here to fetch and format reply comments
     // Using PDO, prepare a new query and fetch reply comments based on $parent_id
     // Construct and return HTML for reply comments

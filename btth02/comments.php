@@ -1,7 +1,17 @@
 <?php
+global $connection;
+require_once ("pdo_connect.php");
 if(!empty($_POST["name"]) && !empty($_POST["comment"])){
-    $insertComments = "INSERT INTO comment (parent_id, comment, sender) VALUES ('".$_POST["commentId"]."', '".$_POST["comment"]."', '".$_POST["name"]."')";
-    mysqli_query($conn, $insertComments) or die("database error: ". mysqli_error($conn));
+    $insertComments = "INSERT INTO comment (parent_id, comment, sender) VALUES (:parent_id, :comment, :sender)";
+    $statement = $connection->prepare($insertComments);
+
+    // Bind parameters to the prepared statement
+    $statement->bindParam(':parent_id', $_POST["commentId"]);
+    $statement->bindParam(':comment', $_POST["comment"]);
+    $statement->bindParam(':sender', $_POST["name"]);
+
+    $statement->execute();
+
     $message = '<label class="text-success">Comment posted Successfully.</label>';
     $status = array(
         'error'  => 0,
