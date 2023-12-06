@@ -9,9 +9,10 @@ $options = [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     PDO::ATTR_EMULATE_PREPARES => false,
 ];
-$dsn = "mysql:host=$host;port=$port;dbname=$db}";
+$dsn = "mysql:host=$host;port=$port;dbname=$db";
 try {
-    $connection = new PDO($dsn, $this->user, $this->pass, $this->options);
+    $connection = new PDO($dsn, $user, $pass, $options);
+    echo "connected";
 } catch (PDOException $e) {
     echo $e->getMessage();
 }
