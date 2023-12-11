@@ -37,7 +37,7 @@ $currentFile = basename($_SERVER['PHP_SELF']);
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link <?php echo $currentFile === "index.php" ? "active fw-bold" : ""; ?>" aria-current="page" href="./">Trang chủ</a>
+                        <a class="nav-link <?php echo $currentFile === "index.php" ? "active fw-bold" : ""; ?>" aria-current="page" href="">Trang chủ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../index.php">Trang ngoài</a>

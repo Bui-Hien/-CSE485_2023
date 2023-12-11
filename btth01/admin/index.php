@@ -4,11 +4,11 @@ include("./header.php")
 <!---->
 <?php
 require_once '../Database.php';
-require_once '../Command_sql.php';
+require_once '../command_sql.php';
 
 
-$db = new \conn\Database();
-$command_sql = new \conn\Command_sql($db);
+$db = new \Database();
+$command_sql = new \Command_sql($db);
 $user= $command_sql->tong_nguoi_dung();
 $the_loai = $command_sql->tong_the_loai();
 $tac_gia= $command_sql->tong_tac_gia();

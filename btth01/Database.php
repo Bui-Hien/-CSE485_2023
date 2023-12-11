@@ -1,9 +1,5 @@
 <?php
 
-namespace conn;
-
-use PDO;
-use PDOException;
 
 class Database
 {

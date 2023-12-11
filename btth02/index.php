@@ -5,8 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../asets/bootstrap.min.css" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
@@ -22,13 +21,15 @@
         </div>
         <span id="message"></span>
         <div class="form-group d-flex">
-            <input class="d-none" name="commentId" id="commentId" value="0"/>
+            <input class="d-none
+" name="commentId" id="commentId" value="0"/>
             <input type="submit" name="submit" id="submit" class="btn btn-primary" value="Post Comment"/>
         </div>
     </form>
     <div id="showComments"></div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../../asets/jquery-3.6.4.min.js"></script>
+<script src="../../asets/bootstrap.bundle.min.js"></script>
 <script src="comments.js"></script>
 </body>
 </html>

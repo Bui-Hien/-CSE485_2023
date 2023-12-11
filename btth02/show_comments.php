@@ -23,11 +23,13 @@ $commentHTML = '';
 // Iterate through the comments
 foreach ($commentsResult as $comment) {
     $commentHTML .= '
-		<div class="panel panel-primary">
-		<div class="panel-heading">By <b>'.$comment["sender"].'</b> on <i>'.$comment["date"].'</i></div>
-		<div class="panel-body">'.$comment["comment"].'</div>
-		<div class="panel-footer" align="right"><button type="button" class="btn btn-primary reply" id="'.$comment["id"].'">Reply</button></div>
-		</div> ';
+		<form>
+            <div class="panel panel-primary">
+            <div class="panel-heading">By <b>' . $comment["sender"] . '</b> on <i>' . $comment["date"] . '</i></div>
+            <div class="panel-body">' . $comment["comment"] . '</div>
+            <div class="panel-footer" type="submit" align="right"><button type="button" class="btn btn-primary reply" id="' . $comment["id"] . '">Reply</button></div>
+            </div> 
+        </form>';
 
     // Fetch and append reply comments
     $commentHTML .= getCommentReply($connection, $comment["id"]);
@@ -37,9 +39,9 @@ foreach ($commentsResult as $comment) {
 echo $commentHTML;
 
 // Function to fetch reply comments (replace this with your actual function)
-function getCommentReply($connection, $parent_id) {
-    // Write your logic here to fetch and format reply comments
-    // Using PDO, prepare a new query and fetch reply comments based on $parent_id
-    // Construct and return HTML for reply comments
+function getCommentReply($connection, $parent_id)
+{
+    return "hien";
 }
+
 ?>

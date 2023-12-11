@@ -1,14 +1,11 @@
 <?php
 
-namespace conn;
-
-use PDOException;
 
 class Command_sql
 {
     private $db;
 
-    public function __construct(Database $db)
+    public function __construct(\Database $db)
     {
         $this->db = $db;
     }

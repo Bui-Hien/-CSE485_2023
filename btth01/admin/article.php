@@ -1,12 +1,12 @@
 <?php
 include("./header.php");
 require_once '../Database.php';
-require_once '../Command_sql.php';
+require_once '../command_sql.php';
 
 
 
-$db = new \conn\Database();
-$command_sql = new \conn\Command_sql($db);
+$db = new \Database();
+$command_sql = new \Command_sql($db);
 $datas = $command_sql->getAllArticles();
 ?>
 <main class="container mt-5 mb-5">

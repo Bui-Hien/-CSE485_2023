@@ -8,7 +8,7 @@ if (!isset($_SESSION['isLogined'])) { //Neu chua co the
 <?php
 if (isset($_GET['id'])) {
     $article_id = $_GET['id'];
-    require ("commandSql.php");
+    require("commandSql.php");
     $data = getOneArticles($article_id);
 }
 ?>

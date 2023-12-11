@@ -26,10 +26,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./">Trang chủ</a>
+                        <a class="nav-link active" aria-current="page" href="..">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./login.php">Đăng nhập</a>
+                        <a class="nav-link" href="../login.php">Đăng nhập</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
@@ -99,7 +99,7 @@
 
         <div class="col-sm-3">
             <div class="card mb-2" style="width: 100%;">
-                <img src="images/songs//longme.jpg" class="card-img-top" alt="...">
+                <img src="btth01/images/songs//longme.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title text-center">
                         <a href="" class="text-decoration-none">Lòng mẹ</a>

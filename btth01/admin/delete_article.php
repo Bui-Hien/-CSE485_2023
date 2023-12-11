@@ -7,9 +7,9 @@ if (!isset($_SESSION['isLogined'])) { //Neu chua co the
 ?>
 <?php
 require_once '../Database.php';
-require_once '../Command_sql.php';
-$db = new \conn\Database();
-$command_sql = new \conn\Command_sql($db);
+require_once '../command_sql.php';
+$db = new \Database();
+$command_sql = new \Command_sql($db);
 if (isset($_GET['id'])) {
     $idToDelete = $_GET['id'];
 

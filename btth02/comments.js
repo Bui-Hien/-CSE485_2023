@@ -1,12 +1,13 @@
 $(document).ready(function () {
     $('#commentForm').on('submit', function (event) {
         event.preventDefault();
+        //chuan hoa du lieu
         var formData = $(this).serialize();
         $.ajax({
-            url: "comments.php",
-            method: "POST",
-            data: formData,
-            dataType: "JSON",
+            url: "comments.php", //action
+            method: "POST", //method
+            data: formData, //data form
+            dataType: "JSON",   //type data nhan ve
             success: function (response) {
                 if (!response.error) {
                     $('#commentForm')[0].reset();

@@ -33,7 +33,7 @@ try {
                         <td><?= $list['ten_tloai']; ?></td>
                         <td>
                             <input type="hidden" class="form-control" name="update">
-                            <a href='edit_category.php?id=<?= $list['ma_tloai'] ?>'><i
+                            <a href='edit_category.php?id=<?= $list['><i
                                         class="fa-solid fa-pen-to-square"></i></a>
                             <script>
                                 function myDelete() {
@@ -48,7 +48,7 @@ try {
                         </td>
                         <td>
                             <input type="hidden" class="form-control" name="delete">
-                            <a href='process_add_category.php?id=<?= $list['ma_tloai'] ?>' onclick="myDelete()"
+                            <a href='process_add_category.php?id=<?= $list[' onclick="myDelete()"
                                id="delete"><i class="fa-solid fa-trash"></i></a>
                         </td>
                     </tr>

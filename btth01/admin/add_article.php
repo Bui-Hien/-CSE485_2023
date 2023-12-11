@@ -3,11 +3,11 @@ include("./header.php")
 ?>
 <?php
 require_once '../Database.php';
-require_once '../Command_sql.php';
+require_once '../command_sql.php';
 $date_current = date("Y-m-d H:i:s");
 
-$db = new \conn\Database();
-$command_sql = new \conn\Command_sql($db);
+$db = new \Database();
+$command_sql = new \Command_sql($db);
 $theloai = $command_sql->getTheLoai();
 $tacgia = $command_sql->getTacGia();
 ?>
