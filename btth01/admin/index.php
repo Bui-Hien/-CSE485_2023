@@ -1,19 +1,30 @@
+<!DOCTYPE html>
 <?php
 include("./header.php")
 ?>
 <!---->
 <?php
-require_once '../Database.php';
-require_once '../command_sql.php';
-
-
-$db = new \Database();
-$command_sql = new \Command_sql($db);
-$user= $command_sql->tong_nguoi_dung();
-$the_loai = $command_sql->tong_the_loai();
-$tac_gia= $command_sql->tong_tac_gia();
-$bai_viet = $command_sql->tong_bai_viet();
-?>
+//try {
+//    $conn = new PDO(dsn: "mysql:host=mariadb;dbname=btth01_cse485_ex.sql", username: "root", password: "your_password");
+//} catch (PDOException $e) {
+//    echo $e->getMessage();
+//}
+//// $sql_select_count_user = 'SELECT COUNT(ma_tloai) FROM theloai' ;
+//$sql_select_tloai = 'SELECT COUNT(*) FROM theloai' ;
+//$sql_select_tac_gia = 'SELECT COUNT(*) FROM tacgia' ;
+//$sql_select_bai_viet = 'SELECT COUNT(*) FROM baiviet' ;
+//$stmt = $conn->prepare($sql_select_tloai);
+//$stmt->execute();
+//$sl_tloai =  $stmt->fetchColumn();
+//$stmt = $conn->prepare($sql_select_tac_gia);
+//$stmt->execute();
+//$sl_tgia =  $stmt->fetchColumn();
+//$stmt = $conn->prepare($sql_select_bai_viet);
+//$stmt->execute();
+//$sl_bviet = $stmt->fetchColumn();
+//
+//
+//?>
 <main class="container mt-5 mb-5">
     <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
     <div class="row">
@@ -25,7 +36,7 @@ $bai_viet = $command_sql->tong_bai_viet();
                     </h5>
 
                     <h5 class="h1 text-center">
-                        <?php echo $user?>
+                        110
                     </h5>
                 </div>
             </div>
@@ -39,7 +50,7 @@ $bai_viet = $command_sql->tong_bai_viet();
                     </h5>
 
                     <h5 class="h1 text-center">
-                        <?php echo $the_loai ?>
+                        <?= $sl_tloai ?>
                        
                     </h5>
                 </div>
@@ -54,7 +65,7 @@ $bai_viet = $command_sql->tong_bai_viet();
                     </h5>
 
                     <h5 class="h1 text-center">
-                        <?php echo $tac_gia ?>
+                    <?= $sl_tgia ?>
                     </h5>
                 </div>
             </div>
@@ -68,7 +79,7 @@ $bai_viet = $command_sql->tong_bai_viet();
                     </h5>
 
                     <h5 class="h1 text-center">
-                        <?php echo $bai_viet ?>
+                    <?= $sl_bviet ?>
                     </h5>
                 </div>
             </div>
