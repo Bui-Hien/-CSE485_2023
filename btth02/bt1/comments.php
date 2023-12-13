@@ -1,6 +1,6 @@
 <?php
 global $connection;
-require_once ("pdo_connect.php");
+require_once("pdo_connect.php");
 if(!empty($_POST["name"]) && !empty($_POST["comment"])){
     $insertComments = "INSERT INTO comment (parent_id, comment, sender) VALUES (:parent_id, :comment, :sender)";
     $statement = $connection->prepare($insertComments);
