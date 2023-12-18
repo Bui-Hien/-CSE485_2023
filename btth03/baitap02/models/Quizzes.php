@@ -10,53 +10,89 @@ class Quizzes
     private $created_at;
     private $updated_at;
 
-    // Getter for id
-    public function getId() {
+    public function __construct()
+    {
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
         return $this->id;
     }
 
-    // Setter for id
-    public function setId($id) {
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
         $this->id = $id;
     }
 
-    // Getter for lesson_id
-    public function getLessonId() {
+    /**
+     * @return mixed
+     */
+    public function getLessonId()
+    {
         return $this->lesson_id;
     }
 
-    // Setter for lesson_id
-    public function setLessonId($lesson_id) {
+    /**
+     * @param mixed $lesson_id
+     */
+    public function setLessonId($lesson_id): void
+    {
         $this->lesson_id = $lesson_id;
     }
 
-    // Getter for title
-    public function getTitle() {
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
         return $this->title;
     }
 
-    // Setter for title
-    public function setTitle($title) {
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title): void
+    {
         $this->title = $title;
     }
 
-    // Getter for created_at
-    public function getCreatedAt() {
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
         return $this->created_at;
     }
 
-    // Setter for created_at
-    public function setCreatedAt($created_at) {
+    /**
+     * @param mixed $created_at
+     */
+    public function setCreatedAt($created_at): void
+    {
         $this->created_at = $created_at;
     }
 
-    // Getter for updated_at
-    public function getUpdatedAt() {
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
         return $this->updated_at;
     }
 
-    // Setter for updated_at
-    public function setUpdatedAt($updated_at) {
+    /**
+     * @param mixed $updated_at
+     */
+    public function setUpdatedAt($updated_at): void
+    {
         $this->updated_at = $updated_at;
     }
+
+
 }
