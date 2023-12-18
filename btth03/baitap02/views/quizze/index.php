@@ -47,13 +47,11 @@ if (!isset($page)) {
                 <td><?php echo $quizze->getCreatedAt() ?></td>
                 <td><?php echo $quizze->getUpdatedAt() ?></td>
                 <td class="text-center"><a
-                            href="
-                <?php echo textdomain("/btth01/btth03/baitap02/views/quizze/edit.php?id={$quizze->getId()}") ?>"><i
+                            href="index.php?controller=quizzes&action=edit&id=<?php echo $quizze->getId() ?>"><i
                                 class="fa-solid fa-pen-to-square"></i></a></td>
-                <td class="text-center"><a
-                            href="
-                <?php echo textdomain("/btth01/btth03/baitap02/views/quizze/delete.php?id={$quizze->getId()}") ?>"><i
-                                class="fa-regular fa-trash-can"></i></a></td>
+                <td class="text-center">
+                    <a href="index.php?controller=quizzes&action=delete&id=<?php echo $quizze->getId() ?>">
+                        <i class="fa-regular fa-trash-can"></i></a></td>
             </tr>
         <?php endforeach; ?>
         </tbody>

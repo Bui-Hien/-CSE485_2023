@@ -30,7 +30,7 @@ class QuizzesService
                     $quizze->setId($row['id']);
                     $quizze->setLessonId($row['lesson_id']);
                     $quizze->setTitle($row['title']);
-                    $quizze->setCreatedAt( $row['created_at']);
+                    $quizze->setCreatedAt($row['created_at']);
                     $quizze->setUpdatedAt($row['updated_at']);
                     $quizzes[] = $quizze;
                 }
@@ -86,7 +86,7 @@ class QuizzesService
         }
     }
 
-    public function updateQuizzes($id, $lesson_id, $title)
+    public function updateQuizzes(Quizzes $quizze)
     {
         $database = new Database();
         $conn = $database->getConnect();
@@ -95,8 +95,11 @@ class QuizzesService
 
             $sql = "UPDATE `quizzes` SET `lesson_id`=:lesson_id,`title`=:title, `updated_at`=:updated_at WHERE `id`=:id";
             $stmt = $conn->prepare($sql);
+            $id = $quizze->getId();
             $stmt->bindParam(':id', $id);
-            $stmt->bindParam(':lesson_id', $lesson_id);
+            $lessonId = $quizze->getLessonId();
+            $stmt->bindParam(':lesson_id', $lessonId);
+            $title = $quizze->getTitle();
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':updated_at', $currentDate);
             $stmt->execute();
@@ -106,16 +109,16 @@ class QuizzesService
         }
     }
 
-    public function deleteQuizzes($id)
+    public function deleteQuizzes(Quizzes $quizze)
     {
         $database = new Database();
         $conn = $database->getConnect();
         if (!$conn == null) {
             $sql = "DELETE FROM `quizzes` WHERE id= :id;";
             $stmt = $conn->prepare($sql);
+            $id = $quizze->getId();
             $stmt->bindParam(':id', $id);
             $stmt->execute();
-            echo "row" . $stmt->rowCount();
             return $stmt->rowCount() > 0 ? true : false;
         } else {
             return false;

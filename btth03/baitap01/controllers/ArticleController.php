@@ -57,7 +57,7 @@ class ArticleController
     public function delete()
     {
         $id = $_GET['id'];
-        $article = Article::getById($id);
+        $article = Article::setID($id);
         $article->delete();
 
         header('Location: index.php?controller=article&action=index');

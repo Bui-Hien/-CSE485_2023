@@ -43,13 +43,36 @@ class QuizzesController
 
         $quizeesServivce = new QuizzesService();
         $quizeesServivce->save($quizee);
-        if ($quizeesServivce->save($quizee)){
+        if ($quizeesServivce->save($quizee)) {
             header('Location: index.php?controller=quizzes&action=index');
-        }else{
+        } else {
             header('Location: index.php?controller=quizzes&action=create?error=error');
 
         }
     }
 
+    public function delete()
+    {
+        $id = $_GET['id'];
+        $quizze = new Quizzes();
+        $quizze->setId($id);
+        $quizeesServivce = new QuizzesService();
+        $quizeesServivce->deleteQuizzes($quizze);
+
+        if ($quizeesServivce->deleteQuizzes($quizze)) {
+            header('Location: index.php?controller=quizzes&action=index');
+        } else {
+            header('Location: index.php?controller=quizzes&action=create?error=error');
+
+        }
+    }
+
+    public function edit()
+    {
+        $id = $_GET['id'];
+        $quizze = new Quizzes();
+        $quizze->setId($id);
+        require APP_ROOT . '/baitap02/views/quizze/edit.php';
+    }
 
 }
