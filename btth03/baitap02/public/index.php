@@ -1,6 +1,21 @@
 <?php
+
+
 require_once '../../baitap02/config/config.php';
-require_once '../../baitap02/config/Database.php';
-require_once APP_ROOT . '/baitap02/controllers/QuizzesController.php';
-$quizzesController = new \controllers\QuizzesController();
-$quizzesController->index();
+$controller = isset($_GET['controller']) ? $_GET['controller'] : 'quizzes';
+$action = isset($_GET['action']) ? $_GET['action'] : 'index';
+
+// Create the controller class name
+$controllerClass = ucfirst($controller) . 'Controller';
+
+// Instantiate the controller
+$controllerFile = APP_ROOT . "/baitap02/controllers/$controllerClass.php";
+if (file_exists($controllerFile)) {
+    echo "ok";
+    require_once $controllerFile;
+    $controllerClassName = "\\controllers\\$controllerClass"; // Fully qualified class name
+    $controllerInstance = new $controllerClassName(); // Instantiate the class
+
+    $controllerInstance->$action();
+}
+?>

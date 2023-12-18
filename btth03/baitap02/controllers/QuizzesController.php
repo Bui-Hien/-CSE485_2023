@@ -2,9 +2,12 @@
 
 namespace controllers;
 
+require_once APP_ROOT . '/baitap02/services/QuizzesService.php';
+require_once APP_ROOT . '/baitap02/models/Quizzes.php';
+
+use models\Quizzes;
 use services\QuizzesService;
 
-require_once APP_ROOT . '/baitap02/services/QuizzesService.php';
 
 class QuizzesController
 {
@@ -16,16 +19,37 @@ class QuizzesController
         if (isset($_GET['page'])) {
             $page = $_GET['page'];
         }
-        $quizzesService->updateQuizzes(1, 1, "Quiz1");
         $quizzes = $quizzesService->getQuizzes($page * 10);
-        include APP_ROOT . '/baitap02/views/quizze/index.php';
+        require APP_ROOT . '/baitap02/views/quizze/index.php';
     }
 
-    public function delete()
+    public function create()
     {
-        include APP_ROOT . '/baitap02/views/quizze/delete.php';
-        $quizzesService = new QuizzesService();
-        $quizzesService->deleteQuizzes($_GET['id']);
+        require APP_ROOT . '/baitap02/views/quizze/create.php';
     }
+
+    public function store()
+    {
+        $id = $_POST['id'];
+        $lesson_id = $_POST['lession_id'];
+        $title = $_POST['title'];
+        $currentDate = date('Y-m-d');
+        $quizee = new Quizzes();
+        $quizee->setId($id);
+        $quizee->setLessonId($lesson_id);
+        $quizee->setTitle($title);
+        $quizee->setCreatedAt($currentDate);
+        $quizee->setUpdatedAt($currentDate);
+
+        $quizeesServivce = new QuizzesService();
+        $quizeesServivce->save($quizee);
+        if ($quizeesServivce->save($quizee)){
+            header('Location: index.php?controller=quizzes&action=index');
+        }else{
+            header('Location: index.php?controller=quizzes&action=create?error=error');
+
+        }
+    }
+
 
 }

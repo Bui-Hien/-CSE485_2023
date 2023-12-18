@@ -24,7 +24,7 @@ if (!isset($page)) {
 <body>
 <div class="container">
     <h3 class="text-center text-uppercase text-success mt-5">Manager quizzes</h3>
-    <a href="<?php echo textdomain('/btth01/btth03/baitap02/views/quizze/add.php') ?>" class="btn btn-success">Add
+    <a href="<?php echo textdomain('index.php?controller=quizzes&action=create') ?>" class="btn btn-success">Add
         quizzes</a>
     <table class="table">
         <thead>

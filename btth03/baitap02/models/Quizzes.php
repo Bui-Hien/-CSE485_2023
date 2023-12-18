@@ -10,20 +10,8 @@ class Quizzes
     private $created_at;
     private $updated_at;
 
-    /**
-     * @param $id
-     * @param $lesson_id
-     * @param $title
-     * @param $created_at
-     * @param $updated_at
-     */
-    public function __construct($id, $lesson_id, $title, $created_at, $updated_at)
+    public function __construct()
     {
-        $this->id = $id;
-        $this->lesson_id = $lesson_id;
-        $this->title = $title;
-        $this->created_at = $created_at;
-        $this->updated_at = $updated_at;
     }
 
     /**

@@ -2,10 +2,11 @@
 
 namespace services;
 
-use db\Database;
+use database\Database;
 use models\Quizzes;
 
 require_once APP_ROOT . '/baitap02/models/Quizzes.php';
+require_once APP_ROOT . '/baitap02/config/Database.php';
 
 
 class QuizzesService
@@ -25,7 +26,12 @@ class QuizzesService
 
                 $quizzes = [];
                 while (($row = $stmt->fetch())) {
-                    $quizze = new Quizzes($row['id'], $row['lesson_id'], $row['title'], $row['created_at'], $row['updated_at']);
+                    $quizze = new Quizzes();
+                    $quizze->setId($row['id']);
+                    $quizze->setLessonId($row['lesson_id']);
+                    $quizze->setTitle($row['title']);
+                    $quizze->setCreatedAt( $row['created_at']);
+                    $quizze->setUpdatedAt($row['updated_at']);
                     $quizzes[] = $quizze;
                 }
                 return $quizzes;
@@ -54,16 +60,25 @@ class QuizzesService
         }
     }
 
-    public function createQuizzes($id, $lesson_id, $title)
+    public function save(Quizzes $quizze)
     {
         $database = new Database();
         $conn = $database->getConnect();
         if (!$conn == null) {
-            $sql = "INSERT INTO `quizzes`(`id`, `lesson_id`, `title`, `created_at`, `updated_at`) VALUES (:id,:lesson_id,:title, '2023-01-02', '2023-01-02')";
+            $sql = "INSERT INTO `quizzes`(`id`, `lesson_id`, `title`, `created_at`, `updated_at`) VALUES (:id,:lesson_id,:title, :created_at, :updated_at)";
             $stmt = $conn->prepare($sql);
+
+            $id = $quizze->getId();
+            $lessonId = $quizze->getLessonId();
+            $title = $quizze->getTitle();
+            $createdAt = $quizze->getCreatedAt();
+            $updatedAt = $quizze->getUpdatedAt();
+
             $stmt->bindParam(':id', $id);
-            $stmt->bindParam(':lesson_id', $lesson_id);
+            $stmt->bindParam(':lesson_id', $lessonId);
             $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':created_at', $createdAt);
+            $stmt->bindParam(':updated_at', $updatedAt);
             $stmt->execute();
             return $stmt->rowCount() > 0 ? true : false;
         } else {
@@ -76,11 +91,14 @@ class QuizzesService
         $database = new Database();
         $conn = $database->getConnect();
         if (!$conn == null) {
-            $sql = "UPDATE `quizzes` SET `lesson_id`=:lesson_id,`title`=:title WHERE `id`=:id";
+            $currentDate = date('Y-m-d');
+
+            $sql = "UPDATE `quizzes` SET `lesson_id`=:lesson_id,`title`=:title, `updated_at`=:updated_at WHERE `id`=:id";
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':lesson_id', $lesson_id);
             $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':updated_at', $currentDate);
             $stmt->execute();
             return $stmt->rowCount() > 0 ? true : false;
         } else {
