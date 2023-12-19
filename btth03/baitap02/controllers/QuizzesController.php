@@ -33,7 +33,7 @@ class QuizzesController
         $id = $_POST['id'];
         $lesson_id = $_POST['lession_id'];
         $title = $_POST['title'];
-        $currentDate = date('Y-m-d');
+        $currentDate = date("Y-m-d");
         $quizee = new Quizzes();
         $quizee->setId($id);
         $quizee->setLessonId($lesson_id);
@@ -43,12 +43,24 @@ class QuizzesController
 
         $quizeesServivce = new QuizzesService();
         $quizeesServivce->save($quizee);
-        if ($quizeesServivce->save($quizee)) {
-            header('Location: index.php?controller=quizzes&action=index');
-        } else {
-            header('Location: index.php?controller=quizzes&action=create?error=error');
+        header('Location: index.php?controller=quizzes&action=index');
+    }
 
-        }
+    public function update()
+    {
+        $id = $_POST['id'];
+        $lesson_id = $_POST['lession_id'];
+        $title = $_POST['title'];
+        $currentDate = date("Y-m-d");
+        $quizee = new Quizzes();
+        $quizee->setId($id);
+        $quizee->setLessonId($lesson_id);
+        $quizee->setTitle($title);
+        $quizee->setUpdatedAt($currentDate);
+
+        $quizeesServivce = new QuizzesService();
+        $quizeesServivce->updateQuizzes($quizee);
+        header('Location: index.php?controller=quizzes&action=index');
     }
 
     public function delete()
@@ -58,13 +70,8 @@ class QuizzesController
         $quizze->setId($id);
         $quizeesServivce = new QuizzesService();
         $quizeesServivce->deleteQuizzes($quizze);
+        header('Location: index.php?controller=quizzes&action=index');
 
-        if ($quizeesServivce->deleteQuizzes($quizze)) {
-            header('Location: index.php?controller=quizzes&action=index');
-        } else {
-            header('Location: index.php?controller=quizzes&action=create?error=error');
-
-        }
     }
 
     public function edit()
@@ -72,6 +79,8 @@ class QuizzesController
         $id = $_GET['id'];
         $quizze = new Quizzes();
         $quizze->setId($id);
+        $quizeesServivce = new QuizzesService();
+        $resultQuize = $quizeesServivce->getQuizze($quizze);
         require APP_ROOT . '/baitap02/views/quizze/edit.php';
     }
 
