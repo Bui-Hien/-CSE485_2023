@@ -125,7 +125,6 @@ class QuizzesService
         $database = new Database();
         $conn = $database->getConnect();
         if (!$conn == null) {
-            $currentDate = date('Y-m-d');
 
             $sql = "UPDATE `quizzes` SET `lesson_id`=:lesson_id,`title`=:title, `updated_at`=:updated_at WHERE `id`=:id";
             $stmt = $conn->prepare($sql);
@@ -135,7 +134,8 @@ class QuizzesService
             $stmt->bindParam(':lesson_id', $lessonId);
             $title = $quizze->getTitle();
             $stmt->bindParam(':title', $title);
-            $stmt->bindParam(':updated_at', $currentDate);
+            $updatedAt = $quizze->getUpdatedAt();
+            $stmt->bindParam(':updated_at', $updatedAt);
             $stmt->execute();
             return $stmt->rowCount() > 0 ? true : false;
         } else {

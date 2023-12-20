@@ -11,23 +11,10 @@ class Options
     private $created_at;
     private $updated_at;
 
-    /**
-     * @param $id
-     * @param $question_id
-     * @param $option
-     * @param $is_correct
-     * @param $created_at
-     * @param $updated_at
-     */
-    public function __construct($id, $question_id, $option, $is_correct, $created_at, $updated_at)
+    public function __construct()
     {
-        $this->id = $id;
-        $this->question_id = $question_id;
-        $this->option = $option;
-        $this->is_correct = $is_correct;
-        $this->created_at = $created_at;
-        $this->updated_at = $updated_at;
     }
+
 
     /**
      * @return mixed
