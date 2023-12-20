@@ -2,7 +2,7 @@
 
 
 require_once '../../baitap02/config/config.php';
-$controller = isset($_GET['controller']) ? $_GET['controller'] : 'quizzes';
+$controller = isset($_GET['controller']) ? $_GET['controller'] : 'users';
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
 
 // Create the controller class name

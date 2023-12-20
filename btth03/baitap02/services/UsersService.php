@@ -4,32 +4,30 @@ namespace services;
 
 use conn\User;
 use database\Database;
-use models\Quizzes;
+use models\Users;
 
 require_once APP_ROOT . '/baitap02/models/Users.php';
 require_once APP_ROOT . '/baitap02/config/Database.php';
 class UsersService
 {
-    public function getQuizzes($offset)
+    public function getUsers($offset)
     {
         $database = new Database();
         $conn = $database->getConnect();
 
         if ($conn !== null) {
             try {
-                $sql = "SELECT * FROM us LIMIT 10 OFFSET :offset;";
+                $sql = "SELECT * FROM users LIMIT 10 OFFSET :offset;";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
                 $stmt->execute();
 
                 $uers = [];
                 while (($row = $stmt->fetch())) {
-                    $user = new Quizzes();
+                    $user = new Users();
                     $user->setId($row['id']);
-                    $user->setLessonId($row['lesson_id']);
-                    $user->setTitle($row['title']);
-                    $user->setCreatedAt($row['created_at']);
-                    $user->setUpdatedAt($row['updated_at']);
+                    $user->setName($row['name']);
+                    $user->setEmail($row['email']);
                     $uers[] = $user;
                 }
                 return $uers;
@@ -44,7 +42,7 @@ class UsersService
     }
 
 
-    public function getQuizze(User $user)
+    public function getUser(Users $user)
     {
         $database = new Database();
         $conn = $database->getConnect();
@@ -58,13 +56,11 @@ class UsersService
                 $stmt->execute();
 
                 $result = $stmt->fetch();
-                $quizze = new Quizzes();
-                $quizze->setId($result['id']);
-                $quizze->setLessonId($result['lesson_id']);
-                $quizze->setTitle($result['title']);
-                $quizze->setCreatedAt($result['created_at']);
-                $quizze->setUpdatedAt($result['updated_at']);
-                return $quizze;
+                $user = new Users();
+                $user->setId($result['id']);
+                $user->setName($result['name']);
+                $user->setEmail($result['email']);
+                return $user;
             } catch (\PDOException $e) {
                 error_log("Database error: " . $e->getMessage());
                 return [];
@@ -76,12 +72,12 @@ class UsersService
     }
 
 
-    public function getRowQuizzes()
+    public function getRowUser()
     {
         $database = new Database();
         $conn = $database->getConnect();
         if (!$conn == null) {
-            $sql = "SELECT * FROM `quizzes` WHERE 1";
+            $sql = "SELECT * FROM `users` WHERE 1";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             return ceil($stmt->rowCount() / 10);
@@ -90,26 +86,23 @@ class UsersService
         }
     }
 
-    public function save(Quizzes $quizze)
+    public function save(Users $user)
     {
         $database = new Database();
         $conn = $database->getConnect();
         if (!$conn == null) {
             try {
-                $sql = "INSERT INTO `quizzes`(`id`, `lesson_id`, `title`, `created_at`, `updated_at`) VALUES (:id,:lesson_id,:title, :created_at, :updated_at)";
+                $sql = "INSERT INTO `users`(`id`, `name`, `email`) VALUES (:id,:name,:email)";
                 $stmt = $conn->prepare($sql);
 
-                $id = $quizze->getId();
-                $lessonId = $quizze->getLessonId();
-                $title = $quizze->getTitle();
-                $createdAt = $quizze->getCreatedAt();
-                $updatedAt = $quizze->getUpdatedAt();
+                $id = $user->getId();
+                $name = $user->getName();
+                $email = $user->getEmail();
+
 
                 $stmt->bindParam(':id', $id);
-                $stmt->bindParam(':lesson_id', $lessonId);
-                $stmt->bindParam(':title', $title);
-                $stmt->bindParam(':created_at', $createdAt);
-                $stmt->bindParam(':updated_at', $updatedAt);
+                $stmt->bindParam(':name', $name);
+                $stmt->bindParam(':email', $email);
                 $stmt->execute();
                 return $stmt->rowCount() > 0 ? true : false;
             } catch (\PDOException $exception) {
@@ -119,22 +112,38 @@ class UsersService
         }
     }
 
-    public function updateQuizzes(Quizzes $quizze)
+    public function updateUser(Users $user)
     {
         $database = new Database();
         $conn = $database->getConnect();
         if (!$conn == null) {
             $currentDate = date('Y-m-d');
 
-            $sql = "UPDATE `users` SET `userid`=:lesson_id,`title`=:title, `updated_at`=:updated_at WHERE `id`=:id";
+            $sql = "UPDATE `users` SET `id`=:idUser,`name`=:nameUser, `updated_at`=:updated_at WHERE `id`=:id";
             $stmt = $conn->prepare($sql);
-            $id = $quizze->getId();
-            $stmt->bindParam(':id', $id);
-            $lessonId = $quizze->getLessonId();
-            $stmt->bindParam(':lesson_id', $lessonId);
-            $title = $quizze->getTitle();
-            $stmt->bindParam(':title', $title);
+            $id = $user->getId();
+            $stmt->bindParam(':idUser', $id);
+            $name = $user->getname();
+            $stmt->bindParam(':nameUser', $name);
+            $email = $user->getEmail();
+            $stmt->bindParam(':email', $email);
             $stmt->bindParam(':updated_at', $currentDate);
+            $stmt->execute();
+            return $stmt->rowCount() > 0 ? true : false;
+        } else {
+            return false;
+        }
+    }
+
+    public function deleteUser(Users $user)
+    {
+        $database = new Database();
+        $conn = $database->getConnect();
+        if (!$conn == null) {
+            $sql = "DELETE FROM `users` WHERE id= :id;";
+            $stmt = $conn->prepare($sql);
+            $id = $user->getId();
+            $stmt->bindParam(':id', $id);
             $stmt->execute();
             return $stmt->rowCount() > 0 ? true : false;
         } else {
